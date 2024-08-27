@@ -2,13 +2,19 @@ import express from 'express'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import cors from 'cors'
 import { dbConnect } from './dbConnect/dbConnect.js '
 
-dotenv.config()
 
+dotenv.config()
 const app = express()
 
+app.use(helmet())
+app.use(morgan("common"))
+app.use(cors())
+app.use(express.json())
+
 app.listen(5000, () => {
-    console.log("Server is listening...");
+    console.log("Server is running...");
     dbConnect()
 })
