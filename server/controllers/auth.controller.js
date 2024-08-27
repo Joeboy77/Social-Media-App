@@ -1,13 +1,9 @@
-import userModel from "../models/user.model.js";
-//Register controller
+import { registerUser } from "../services/auth.service.js";
+
 export const register = async(req, res) => {
     try{
-        const newUser = new userModel({
-            username: req.boby.username,
-            email: req.body.email,
-            password: req.body.password
-        })
-        await newUser.save()
+        const newUser = await registerUser(req.body)
+
         res.status(200).json({
             newUser,
             message: "User has been created"
