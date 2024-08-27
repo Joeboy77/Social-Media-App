@@ -27,6 +27,16 @@ const userShema = new Schema({
     isAdmin:{
         type: Boolean,
         default: false
+    },
+    desc:{
+        type: String,
+    },
+    from: {
+        type: String,
+    },
+    relationship: {
+        type: Number,
+        enum: [1, 2, 3]
     }
 })
 
