@@ -20,3 +20,22 @@ export const updateUser = async(userId, updateData) =>{
         throw err
     }
 }
+
+export const deleteUser = async(userId) =>{
+    try{
+       await userModel.findByIdAndDelete(userId)
+        return user
+    } catch(err){
+        throw err
+    }
+}
+
+export const getUser = async(userId) =>{
+   
+    try{
+        const user = await userModel.findById(userId)
+        return user
+    } catch(err){
+        throw err
+    }
+}

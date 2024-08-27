@@ -22,17 +22,16 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const user = await loginUser(req.body, res);
-    const { password, ...userData } = user._doc;
+    await deleteUser(req.body);
 
     res.status(200).json({
       message: "User logged In successfully",
-      userData,
+      data,
     });
   } catch (error) {
     res.status(500).json({
       error: error,
-      message: "Error Occurred logging in the User",
+      message: "Error Occurred deleting in the User",
     });
     console.log(error);
   }
