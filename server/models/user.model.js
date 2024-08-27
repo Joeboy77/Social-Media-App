@@ -6,6 +6,7 @@ const userShema = new Schema({
         type: String,
         required: true,
         unique: true,
+        min: 3
     },
     email: {
         type: String,
@@ -13,7 +14,7 @@ const userShema = new Schema({
     },
     password: {
         type: String,
-        required: ture
+        required: true
     },
     profilePicture: {
         type: String,
