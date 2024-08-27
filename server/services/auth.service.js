@@ -9,7 +9,22 @@ export const registerUser = async(body) => {
             password: hashedPassword
         })
         await newUser.save()
-      
-   
+        
+        return newUser
 } 
+
+export const loginUser = async(body) => {
+    const user = await userModel.findOne({email: body.email})
+    if(!user) {
+        throw new Error("User does not exist")
+    }
+
+    const validatePassword = await bcrypt.compare(body.password, user.password)
+
+    if(!validatePassword) {
+        throw new Error("Wrong password")
+    }
+
+    return user
+}
 
