@@ -36,16 +36,17 @@ export const deleteUserController = async(req, res) => {
             }
         } catch(error){
             console.log(error);
-            res.status(500).json("You can only update your account")
-            }
-    } 
+            res.status(500).json("You can only delete your account")
+        }
+    }
 }
 
 export const getUserController = async(req, res) => {
     try{
         const user = await getUser(req.params.id)
+        const {password, ...data} = user._doc
         res.status(200).json({
-            user,
+            data,
             message: "Account has been fetched successfully"
         })
     } catch(err){
