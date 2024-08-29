@@ -3,35 +3,42 @@ import { deleteUser, getUser, updateUser } from "../services/user.service.js";
 export const updateUserController = async(req, res) => {
     if(req.body.userId === req.params.id || req.body.isAdmin){
         try{
-
+            try{
+                const user = await updateUser(req.params.id, req.body)
+                res.status(200).json({
+                    user,
+                    message: "Account updated successfully"
+                })
+            } catch(err){
+                console.log(err);
+                res.status(500).json(err)
+            }
         } catch(error){
             console.log(error);
             res.status(500).json("You can only update your account")
         }
-        try{
-            const user = await updateUser(req.params.id, req.body)
-            res.status(200).json({
-                user,
-                message: "Account updated successfully"
-            })
-        } catch(err){
-            console.log(err);
-            res.status(500).json(err)
-        }
+        
     }
     
 }
 
 export const deleteUserController = async(req, res) => {
-    try{
-        await deleteUser(req.params.id)
-        res.status(200).json({
-            message: "Account deleted successfully"
-        })
-    } catch(err){
-        console.log(err);
-        res.status(500).json(err)
-    }
+    if(req.body.userId === req.params.id || req.body.isAdmin){
+        try{
+            try{
+                await deleteUser(req.params.id)
+                res.status(200).json({
+                    message: "Account deleted successfully"
+                })
+            } catch(err){
+                console.log(err);
+                res.status(500).json(err)
+            }
+        } catch(error){
+            console.log(error);
+            res.status(500).json("You can only update your account")
+            }
+    } 
 }
 
 export const getUserController = async(req, res) => {
