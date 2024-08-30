@@ -38,7 +38,7 @@ const userShema = new Schema({
         type: Number,
         enum: [1, 2, 3]
     },
-    folloers: {
+    followers: {
         type: Array,
         default: [],
     },

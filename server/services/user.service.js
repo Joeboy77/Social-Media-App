@@ -48,8 +48,8 @@ export const followUser = async(userdata, updateData) => {
             const user = await userModel.findById(userdata.userId)
             const currentUser = await userModel.findById(updateData.id)
             if(!user.followers.includes(userdata.userId)){
-                await user.updateOne({$push: {followers: userdata.userId}})
-                await currentUser.updateOne({$push: {followongs: updateData.id}})
+                await user.updateOne({$push: {followers: updateData.id}})
+                await currentUser.updateOne({$push: {followongs:  userdata.userId}})
                 return {user, currentUser}
             } else {
                 throw new Error ("You have already followed the user")
