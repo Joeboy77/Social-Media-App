@@ -37,6 +37,14 @@ const userShema = new Schema({
     relationship: {
         type: Number,
         enum: [1, 2, 3]
+    },
+    folloers: {
+        type: Array,
+        default: [],
+    },
+    followings: {
+        type: Array,
+        default: [],
     }
 })
 
