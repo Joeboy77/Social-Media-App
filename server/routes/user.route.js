@@ -13,10 +13,10 @@ router.delete("/:id", deleteUserController)
 router.get("/:id", getUserController)
 
 //follow a user
-router.get("/follow/:id", followUserController)
+router.put("/follow/:id", followUserController)
 
 //unfollow user
-router.get("/unfollow/:id", unfollowUserController)
+router.put("/unfollow/:id", unfollowUserController)
 
 
 export default router

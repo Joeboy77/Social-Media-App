@@ -22,7 +22,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    await deleteUser(req.body);
+    const data = await deleteUser(req.params.id);
 
     res.status(200).json({
       message: "User logged In successfully",
@@ -31,7 +31,7 @@ export const login = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: error,
-      message: "Error Occurred deleting in the User",
+      message: "Error occured logging the user",
     });
     console.log(error);
   }
