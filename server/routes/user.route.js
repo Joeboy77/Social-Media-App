@@ -12,4 +12,6 @@ router.delete("/:id", deleteUserController)
 //get user
 router.get("/:id", getUserController)
 
+//follow a user
+
 export default router

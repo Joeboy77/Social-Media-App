@@ -39,3 +39,6 @@ export const getUser = async(userId) =>{
         throw err
     }
 }
+
+
+
