@@ -41,7 +41,9 @@ export const getUser = async(userId) =>{
 }
 
 export const followUser = async(userdata, updateData) => {
-    if(!userdata.userId === updateData.id){
+    if(userdata.userId === updateData.id){
+        throw new Error("You cannot folllow yourself!")
+    } else {
         try{
             const user = await userModel.findById(userdata.userId)
             const currentUser = await userModel.findById(updateData.id)
@@ -54,10 +56,8 @@ export const followUser = async(userdata, updateData) => {
             }
         } catch(err) {
             throw err
-            
         }
-    } else {
-        throw new Error("You cannot folllow yourself!")
+        
     }   
 }
 
