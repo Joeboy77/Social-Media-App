@@ -40,5 +40,44 @@ export const getUser = async(userId) =>{
     }
 }
 
+export const followUser = async(userdata, updateData) => {
+    if(!userdata.userId === updateData.id){
+        try{
+            const user = await userModel.findById(userdata.userId)
+            const currentUser = await userModel.findById(updateData.id)
+            if(!user.followers.includes(userdata.userId)){
+                await user.updateOne({$push: {followers: userdata.userId}})
+                await currentUser.updateOne({$push: {followongs: updateData.id}})
+                return {user, currentUser}
+            } else {
+                throw new Error ("You have already followed the user")
+            }
+        } catch(err) {
+            throw err
+            
+        }
+    } else {
+        throw new Error("You cannot folllow yourself!")
+    }   
+}
 
-
+export const unfollowUser = async(userdata, updateData) => {
+    if(!userdata.userId === updateData.id){
+        try{
+            const user = await userModel.findById(userdata.userId)
+            const currentUser = await userModel.findById(updateData.id)
+            if(user.followers.includes(userdata.userId)){
+                await user.updateOne({$pull: {followers: userdata.userId}})
+                await currentUser.updateOne({$pull: {followongs: updateData.id}})
+                return {user, currentUser}
+            } else {
+                throw new Error ("You don't follow this user")
+            }
+        } catch(err) {
+            throw err
+            
+        }
+    } else {
+        throw new Error("You cannot unfolllow yourself!")
+    }   
+}

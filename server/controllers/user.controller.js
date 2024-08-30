@@ -1,4 +1,4 @@
-import { deleteUser, getUser, updateUser } from "../services/user.service.js";
+import { deleteUser, followUser, getUser, unfollowUser, updateUser } from "../services/user.service.js";
 
 export const updateUserController = async(req, res) => {
     if(req.body.userId === req.params.id || req.body.isAdmin){
@@ -40,6 +40,32 @@ export const getUserController = async(req, res) => {
     try{
         const user = await getUser(req.params.id)
         const {password, ...data} = user._doc
+        res.status(200).json({
+            data,
+            message: "Account has been fetched successfully"
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).json(err)
+    }
+}
+
+export const followUserController = async(req, res) => {
+    try{
+        const data = await followUser(req.body, req.params)
+        res.status(200).json({
+            data,
+            message: "Account has been fetched successfully"
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).json(err)
+    }
+}
+
+export const unfollowUserController = async(req, res) => {
+    try{
+        const data = await unfollowUser(req.body, req.params)
         res.status(200).json({
             data,
             message: "Account has been fetched successfully"
