@@ -22,7 +22,6 @@ export const updateUserController = async(req, res) => {
 
 export const deleteUserController = async(req, res) => {
     if(req.body.userId === req.params.id || req.body.isAdmin){
-        try{
             try{
                 await deleteUser(req.params.id)
                 res.status(200).json({
@@ -31,11 +30,9 @@ export const deleteUserController = async(req, res) => {
             } catch(err){
                 console.log(err);
                 res.status(500).json(err)
-            }
-        } catch(error){
-            console.log(error);
-            res.status(500).json("You can only delete your account")
-        }
+            } 
+    } else{
+        res.status(500).json("You can only delete your account")
     }
 }
 
