@@ -42,3 +42,18 @@ export const deletePost = async(params, body) => {
         throw error
     }
 }
+
+export const likeAndDislike = async(params, body) => {
+    try{
+        const post = await postModel.findById(params.id)
+        if(!post.likes.includes(body.userId)){
+            await post.updateOne({$push: {likes: body.userId }})
+
+        } else{
+            await post.updateOne({$pull: {likes: body.userId}})
+        }
+        return post
+    } catch(error){
+        throw error
+    }
+}

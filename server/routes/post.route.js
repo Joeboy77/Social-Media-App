@@ -11,5 +11,7 @@ router.put('/update-post/:id', updatePostController)
 //delete post
 router.delete('/delete-post/:id', deletePostController)
 
+//like and dislike
+
 export default router
 
