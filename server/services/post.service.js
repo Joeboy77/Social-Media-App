@@ -16,11 +16,11 @@ export const createPost = async(body) => {
 export const updatePost = async(params, body) => {
     try{
         const updatedPost = postModel.findById(params.id)
-        if(post.userId === body.userId){
+        if(updatedPost.userId === body.userId){
             await postModel.updateOne({
                 $set: body,
             }, {
-                new: true
+                new: true,
             })
             return updatedPost
         } else{
