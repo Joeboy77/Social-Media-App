@@ -1,4 +1,4 @@
-import { createPost, updatePost } from "../services/post.service.js";
+import { createPost, deletePost, updatePost } from "../services/post.service.js";
 
 export const createPostController = async(req, res) => {
     try{
@@ -27,6 +27,22 @@ export const updatePostController = async(req, res) => {
         console.log(err);
         res.status(500).json({
             message: 'Post update failed!',
+            err
+        })
+    }
+}
+
+export const deletePostController = async(req, res) => {
+    try{
+        const deletedPost = await deletePost(req.params, req.body)
+        res.status(200).json({
+            deletedPost,
+            message: 'Post has been delete successfully'
+        })
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({
+            message: 'Post deletion failed!',
             err
         })
     }

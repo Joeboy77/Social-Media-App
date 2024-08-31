@@ -28,3 +28,17 @@ export const updatePost = async(params, body) => {
         throw error
     }
 }
+
+export const deletePost = async(params, body) => {
+    try{
+        const deletedPost = postModel.findById(params.id)
+        if(deletedPost.userId === body.userId){
+            await postModel.deleteOne()
+            return deletedPost
+        } else{
+            throw new Error("You can delete only your post")
+        }
+    } catch(error){
+        throw error
+    }
+}
