@@ -1,3 +1,4 @@
+import { trusted } from 'mongoose'
 import postModel from './../models/post.model.js'
 
 
@@ -14,12 +15,17 @@ export const createPost = async(body) => {
 
 export const updatePost = async(params, body) => {
     try{
-        const updatePost = await postModel.findByIdAndUpdate(params.id, {
-            $set: body,
-        }, {
-            new: true,
-        })
-        return updatePost
+        const updatedPost = postModel.findById(params.id)
+        if(post.userId === body.userId){
+            await postModel.updateOne({
+                $set: body,
+            }, {
+                new: true
+            })
+            return updatedPost
+        } else{
+            throw new Error("You can update only your post")
+        }
     } catch(error){
         throw error
     }
