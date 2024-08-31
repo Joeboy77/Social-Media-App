@@ -1,5 +1,5 @@
 import express from 'express'
-import { createPostController, deletePostController, getPostCOntroller, likeAndDislikeController, updatePostController } from '../controllers/post.controller.js'
+import { createPostController, deletePostController, getPostCOntroller, getTimelinePostController, likeAndDislikeController, updatePostController } from '../controllers/post.controller.js'
 const router = express.Router()
 
 //create post
@@ -16,6 +16,10 @@ router.put('/like-post/:id', likeAndDislikeController)
 
 //get post
 router.get('/get-post/:id', getPostCOntroller)
+
+//get timeline post
+router.get('/get-timeline-post/:id', getTimelinePostController)
+
 
 
 

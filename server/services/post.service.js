@@ -1,5 +1,6 @@
 import { trusted } from 'mongoose'
 import postModel from './../models/post.model.js'
+import userModel from '../models/user.model.js'
 
 
 export const createPost = async(body) => {
@@ -69,8 +70,15 @@ export const getPost = async(params) => {
 
 export const getTimelinePost = async(body) => {
     try{
-        const post = await postModel.findById(params.id)
-        return post
+        const currentUser = await userModel.findById(body.userId)
+        const userPost = await postModel.find({userId:  currentUser._id})
+        const timelinePosts = await Promise.all(
+            currentUser.followers.map((friendId) => {
+                return postModel.find({userId: friendId})
+            })
+        )
+
+        return userPost.concat({...timelinePosts})
     } catch(error){
         throw error
     }
