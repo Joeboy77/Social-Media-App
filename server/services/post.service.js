@@ -57,3 +57,21 @@ export const likeAndDislike = async(params, body) => {
         throw error
     }
 }
+
+export const getPost = async(params) => {
+    try{
+        const post = await postModel.findById(params.id)
+        return post
+    } catch(error){
+        throw error
+    }
+}
+
+export const getTimelinePost = async(body) => {
+    try{
+        const post = await postModel.findById(params.id)
+        return post
+    } catch(error){
+        throw error
+    }
+}
