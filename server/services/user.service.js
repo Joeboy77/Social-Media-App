@@ -69,8 +69,8 @@ export const unfollowUser = async(userdata, updateData) => {
             const user = await userModel.findById(userdata.userId)
             const currentUser = await userModel.findById(updateData.id)
             if(!user.followers.includes(userdata.userId)){
-                await user.updateOne({$pull: {followers:  updateData.id}})
-                await currentUser.updateOne({$pull: {followongs: userdata.userId}})
+                await user.updateOne({$pull: {followers:  updateData.id}}, {new: true})
+                await currentUser.updateOne({$pull: {followongs: userdata.userId}}, {new: true})
                 return {user, currentUser}
             } else {
                 throw new Error ("You don't follow this user")
