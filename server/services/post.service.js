@@ -19,8 +19,6 @@ export const updatePost = async(params, body) => {
         if(updatedPost.userId === body.userId){
             await postModel.updateOne({
                 $set: body,
-            }, {
-                new: true,
             })
             return updatedPost
         } else{
